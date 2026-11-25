@@ -11,7 +11,6 @@ function Office() {
     const [deleteOfficeNumber, setDeleteOfficeNumber] = useState("");
     const [message, setMessage] = useState("");
 
-    // Save Office
     const handleSave = async (e) => {
         e.preventDefault();
 
@@ -33,27 +32,25 @@ function Office() {
         }
     };
 
-    // Delete Office using Office Number
     const handleDelete = async (e) => {
         e.preventDefault();
 
         try {
-            // Get all offices
+        
             const response = await axios.get(`${API_URL}/all`);
 
-            // Find office using its office number
             const office = response.data.find(
                 (item) =>
                     String(item.officeNumber) === String(deleteOfficeNumber)
             );
 
-            // Check if office exists
+        
             if (!office) {
                 setMessage("Office not found.");
                 return;
             }
 
-            // Delete office using its UUID
+            
             const result = await axios.delete(
                 `${API_URL}/delete/${office.id}`
             );

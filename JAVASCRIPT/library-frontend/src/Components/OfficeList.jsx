@@ -11,7 +11,6 @@ function OfficeList() {
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
 
-    // Retrieve all offices from the backend
     const loadOffices = useCallback(async () => {
         try {
             setLoading(true);
@@ -30,18 +29,18 @@ function OfficeList() {
         }
     }, []);
 
-    // Load offices when the component opens
+
     useEffect(() => {
         loadOffices();
     }, [loadOffices]);
 
-    // Search by office name or office number
+
     const filteredOffices = offices.filter((office) =>
         office.name.toLowerCase().includes(search.toLowerCase()) ||
         String(office.officeNumber).includes(search)
     );
 
-    // Delete an office
+
     const handleDelete = async (id) => {
 
         const confirmed = window.confirm(
@@ -59,7 +58,6 @@ function OfficeList() {
 
             setMessage(response.data);
 
-            // Refresh the office list
             await loadOffices();
 
         } catch (error) {
